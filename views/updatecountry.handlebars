@@ -1,0 +1,11 @@
+<h1>Update Country</h1>
+<form id = "addCountry" action="/updatecountry/{{country.id}}" method="POST">
+      <fieldset>
+        <legend>Update Country</legend>
+        <label>Name:
+          <input type="text" name="name" value="{{country.name}}""></label>
+        <label>Navy Population:
+          <input type="number" name="navypop" value="{{country.navypop}}""></label>
+        <input type="submit" value="Update Country">
+      </fieldset>
+    </form>

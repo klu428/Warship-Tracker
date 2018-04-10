@@ -1,0 +1,30 @@
+<h1>Update Ship</h1>
+<form id = "updateShip" action="/updateship/{{ship.id}}" method="POST">
+      <fieldset>
+        <legend>Update Ship</legend>
+        <label>Name:
+          <input type="text" name="name" value="{{ship.name}}"></label>
+        <label>Length:
+          <input type="number" name="length" value="{{ship.length}}"></label>
+        <label>Tonnage:
+          <input type="number" name="tonnage" value="{{ship.tonnage}}"></label>
+        <label>Date Constructed:
+          <input type="date" name="date" value="{{ship.date}}"></label>
+        Classification:
+          <select id="class-selector" name="clid">
+            <option></option>
+            {{#each class}}
+            <option value="{{id}}">{{type}}</option>
+            {{/each}}
+          </select><br>
+        Country:
+          <select id="country-selector" name="coid">
+            <option></option>
+            {{#each countries}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select><br>
+        <input type="submit" value="Update Ship">
+      </fieldset>
+</form>
+<script defer>selectClass({{ship.clid}}); selectCountry({{ship.coid}});</script>

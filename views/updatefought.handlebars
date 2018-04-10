@@ -1,0 +1,22 @@
+<h1>Update Ship-Battle Participation</h1>
+<form id = "updateFought" action="/updatefought" method="POST">
+      <fieldset>
+        <legend>Ship Battle Participation</legend>
+        This Ship:
+          <select id="ship-selector" name="sid">
+            {{#each ships}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select><br>
+        Fought In:
+          <select id="battle-selector" name="bid">
+            {{#each battle}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select><br>
+        <input type="hidden" name="oldsid" value="{{sid}}">
+        <input type="hidden" name="oldbid" value="{{bid}}">
+        <input type="submit" value="Update Participant">
+      </fieldset>
+</form>
+<script defer>selectFought({{sid}}, {{bid}});</script>

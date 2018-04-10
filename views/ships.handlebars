@@ -1,0 +1,190 @@
+<h1>Warship Tracker</h1>
+<div id = "ship">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Length</th>
+      <th>Tonnage</th>
+      <th>Date Constructed</th>
+      <th>Classification</th>
+      <th>Country</th>
+      <th>Delete</th>
+      <th>Update</th>
+    </thead>
+    <tbody>
+      {{#each ships}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{length}}</td>
+        <td>{{tonnage}}</td>
+        <td>{{date}}</td>
+        <td>{{class}}</td>
+        <td>{{nation}}</td>
+        <td><a href="/deleteship/{{id}}">Delete</a></td>
+        <td><a href="/updateship/{{id}}">Update</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <form id = "addShip" action="/addship" method="POST">
+      <fieldset>
+        <legend>Add Ship</legend>
+        <label>Name:
+          <input type="text" name="name"></label>
+        <label>Length:
+          <input type="number" name="length"></label>
+        <label>Tonnage:
+          <input type="number" name="tonnage"></label>
+        <label>Date Constructed:
+          <input type="date" name="date"></label>
+        Classification:
+          <select name="clid">
+            {{#each class}}
+            <option value="{{id}}">{{type}}</option>
+            {{/each}}
+          </select><br>
+        Country:
+          <select name="coid">
+            {{#each countries}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select><br>
+        <input type="submit" value="Add Ship">
+      </fieldset>
+    </form>
+    <form id="shipCountry" action="/" method="GET">
+      Filter Ships by Country:
+        <select id="filter-selector" name="coid">
+          {{#each countries}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+        <input type="submit" value="Filter">
+    </form>
+    <script defer>selectFilter({{coid}});</script>
+    <a href="/">Reset</a>
+  </table>
+</div>
+<br>
+<div id = "classification">
+  <table>
+    <thead>
+      <th>Type</th>
+      <th>Symbol</th>
+    </thead>
+    <tbody>
+      {{#each class}}
+      <tr>
+        <td>{{type}}</td>
+        <td>{{symbol}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <form id = "addClass" action="/addclass" method="POST">
+      <fieldset>
+        <legend>Add Classification</legend>
+        <label>Type:
+          <input type="text" name="type"></label>
+        <label>Symbol:
+          <input type="text" name="symbol"></label>
+        <input type="submit" value="Add Classification">
+      </fieldset>
+    </form>
+  </table>
+</div>
+<br>
+<div id = "country">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Navy Population</th>
+      <th>Delete</th>
+      <th>Update</th>
+    </thead>
+    <tbody>
+      {{#each countries}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{navypop}}</td>
+        <td><a href="/deletecountry/{{id}}">Delete</a></td>
+        <td><a href="/updatecountry/{{id}}">Update</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <form id = "addCountry" action="/addcountry" method="POST">
+      <fieldset>
+        <legend>Add Country</legend>
+        <label>Name:
+          <input type="text" name="name"></label>
+        <label>Navy Population:
+          <input type="number" name="navypop"></label>
+        <input type="submit" value="Add Country">
+      </fieldset>
+    </form>
+  </table>
+</div>
+<br>
+<div id = "battle">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Date of Start</th>
+    </thead>
+    <tbody>
+      {{#each battle}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{date}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <form id = "addBattle" action="/addbattle" method="POST">
+      <fieldset>
+        <legend>Add Battle</legend>
+        <label>Name:
+          <input type="text" name="name"></label>
+        <label>Date of Start:
+          <input type="date" name="date"></label>
+        <input type="submit" value="Add Battle">
+      </fieldset>
+    </form>
+  </table>
+</div>
+<br>
+<div id = "fought">
+  <table>
+    <thead>
+      <th>Ship</th>
+      <th>Battle</th>
+      <th>Delete</th>
+      <th>Update</th>
+    </thead>
+    <tbody>
+      {{#each fought}}
+      <tr>
+        <td>{{sname}}</td>
+        <td>{{bname}}</td>
+        <td><a href="/deletefought?sid={{sid}}&bid={{bid}}">Delete</a></td>
+        <td><a href="/updatefought?sid={{sid}}&bid={{bid}}">Update</a></td>
+      </tr>
+      {{/each}}
+    </tbody>
+    <form id = "addFought" action="/addfought" method="POST">
+      <fieldset>
+        <legend>Ship Battle Participation</legend>
+        This Ship:
+          <select name="sid">
+            {{#each ships}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select><br>
+        Fought In:
+          <select name="bid">
+            {{#each battle}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select><br>
+        <input type="submit" value="Add Participant">
+      </fieldset>
+    </form>
+  </table>
+</div>
